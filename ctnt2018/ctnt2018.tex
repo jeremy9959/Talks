@@ -1,9 +1,11 @@
 \documentclass{beamer}
-\usepackage{minted}
+%\usepackage{minted}
 \newtheorem{proposition}{Proposition}
 \newtheorem{algorithm}{Algorithm}
-\begin{document}
+\hypersetup{colorlinks,linkcolor=,urlcolor=blue}
 
+%\usepackage[colorlinks=true]{hyperref}
+\begin{document}
 \begin{frame}
 	\begin{center}
 		Lenstra's Elliptic Curve Factoring Method \\
@@ -17,35 +19,35 @@
 	\begin{problem} Given a positive composite integer $N$, find a proper prime divisor of $N$.
 	\end{problem}
 \end{frame}
-\begin{frame}{Factoring is important}
-
-	{\small
-	Problema, numeros primos a compositis dignoscendi, 
-	hosque in factores suos primos resolvendi, ad gravissima ac utilissima totius arithmeticae pertinere, 
-	...Praetereaque scientiae dignitas requirere videtur, ut omnia subsidia ad solutionem 
-	problematis tam elegantis ac celebris sedulo excolantur.
-	
-	\medskip\noindent
-	The problem of distinguishing prime numbers from composite numbers and of
-	resolving the latter into their prime factors is known to be one of the most
-	important and useful in arithmetic. ..Further, the dignity of the
-	science itself seems to require that every possible means be explored for
-	the solution of a problem so elegant and so celebrated. 
-	
-	\medskip\noindent
-	{\it Gauss,  Disquisitiones Arithmeticae (1801): Article 329}
-	}		
-			
-\end{frame}
-\begin{frame}{Cryptography}
-	\begin{block}{}
-	Gauss thought factoring was important and he was unaware of the role it
-	plays in the security of widely used public-key cryptographic systems.
-	\end{block}
-	\begin{block}{}
-		Although a major reason for current work on the problem, we won't get into the cryptographic applications in this talk.
-	\end{block}
-\end{frame}
+%\begin{frame}{Factoring is important}
+%
+%	{\small
+%	Problema, numeros primos a compositis dignoscendi, 
+%	hosque in factores suos primos resolvendi, ad gravissima ac utilissima totius arithmeticae pertinere, 
+%	...Praetereaque scientiae dignitas requirere videtur, ut omnia subsidia ad solutionem 
+%	problematis tam elegantis ac celebris sedulo excolantur.
+%	
+%	\medskip\noindent
+%	The problem of distinguishing prime numbers from composite numbers and of
+%	resolving the latter into their prime factors is known to be one of the most
+%	important and useful in arithmetic. ..Further, the dignity of the
+%	science itself seems to require that every possible means be explored for
+%	the solution of a problem so elegant and so celebrated. 
+%	
+%\medskip\noindent
+%	{\it Gauss,  Disquisitiones Arithmeticae (1801): Article 329}
+%	}		
+%			
+%\end{frame}
+%\begin{frame}{Cryptography}
+%	\begin{block}{}
+%	Gauss thought factoring was important and he was unaware of the role it
+%	plays in the security of widely used public-key cryptographic systems.
+%	\end{block}
+%	\begin{block}{}
+%		Although a major reason for current work on the problem, we won't get into the cryptographic applications in this talk.
+%	\end{block}
+%\end{frame}
 	
 \begin{frame}{Trial division is impractical}
 	
@@ -65,8 +67,8 @@
 \begin{frame}{Overview of factoring methods}
 	Modern methods of factoring fall into two categories:
 	\begin{itemize}
-		\item Methods based on algebraic groups (such as the $p-1$ method, the elliptic curve method, and generalizations)
-		\item Sieve methods (such as the quadratic and number field sieves)
+		\item Methods based on algebraic groups, such as the $p-1$ method, the elliptic curve method, and generalizations.
+		\item Sieve methods, such as the quadratic and number field sieves.
 	\end{itemize}
 \end{frame}
 \begin{frame}{Overview of factoring}
@@ -87,14 +89,11 @@
 	There is a polynomial time algorithm for a ``quantum computer.''
 \end{frame}
 \begin{frame}{First make sure your number is composite}
-	The complexity of factoring means factoring algorithms should only be applied to composite numbers.
-
 	\begin{theorem}[Fermat] Suppose that $N$ and $a$ are integers with $(a,N)=1$.  If 
 		$$a^{N-1}\not\equiv 1\pmod{N}.$$
 	then $N$ is composite.
 	\end{theorem}
-\end{frame}
-\begin{frame}{The Fermat Test}
+
 	Fermat's theorem allows for a quick test of compositeness.  
 	
 	\begin{block}{The Fermat Test}
@@ -135,7 +134,7 @@
 \end{algorithm}
 \end{frame}
 \begin{frame}{The $p-1$ algorithm}
-	Suppose $N$ is composite.   Then the multiplicative group of units $(\mathbf{Z}/N\mathbf{Z})^*$ is not cyclic, so it is a product of cyclic 
+	Suppose $N$ is (odd and) composite.   Then the multiplicative group of units $(\mathbf{Z}/N\mathbf{Z})^*$ is not cyclic, so it is a product of cyclic 
 	groups by the fundamental theorem of abelian groups. 
 
 	\bigskip\noindent
@@ -192,8 +191,12 @@
 
 \begin{frame}{The Elliptic Curve Method}
 	For the $p-1$ method to work, we have to be lucky enough to have a prime factor that is $B$-powersmooth for a relatively small $B$.
+
+        \bigskip\noindent
 	If the number $N$ we are trying to factor doesn't have this property, then the $p-1$ method won't work.
 
+
+        \bigskip\noindent
 	The elliptic curve method opens the door to more situations in which we can apply the idea of the $p-1$ method.
 \end{frame}
 \begin{frame}{ECM, cont'd}
@@ -204,7 +207,7 @@
 	Suppose that we can find a point $P$ on this curve mod $N$ so that a multiple $K$ of $P$ is zero in the first factor but not the second.
 	
 	\bigskip\noindent
-	If we were to write $E$ in Weierstrass form, and the point $P$ in homogeneous coordinates $[x(P):y(P):z(P)]$, then this condition
+	If we were to write $E$ in Weierstrass form, and the point $P$ in (reduced) homogeneous coordinates $[x(P):y(P):z(P)]$, then this condition
 	would mean that $z(KP)$ is divisible by $U$ but not by $V$.  
 	
 	\bigskip\noindent
@@ -213,25 +216,162 @@
 \begin{frame}{ECM,3}
 
 	If we were fortunate enough that (say) the order of the  first of the two factor groups
-	$n=|E(\mathbf{Z}/U\mathbf{Z})|$ were $B$-powersmooth for a (relatively) small $B$.
+	$n=|E(\mathbf{Z}/U\mathbf{Z})|$ were $B$-powersmooth for a (relatively) small $B$,
 	Then we could use the trick of the $p-1$ method and choose our $K$ to hopefully be divisible by $n$.
 
+        \bigskip\noindent
 	The Riemann hypothesis for elliptic curves over finite fields tells us that if $U$ is prime then $n$ is roughly $p$.
+
+        \bigskip\noindent
+        It seems reasonable to assume that these group orders are essentially random numbers of size roughly $p$.
 	So the chance that $n$ is $B$-powersmooth is the same order as $p-1$ having that property.
 
+        \bigskip\noindent
 	But there are many elliptic curves! 
 \end{frame}
+\begin{frame}{ECM: An example}
+Consider the $7^{th}$ Fermat number 
+$$
+F_{7}=2^{128}+1=340282366920938463463374607431768211457.
+$$
+A Fermat test to base $3$ confirms that $N$ is composite:
+$$
+3^{N-1}\equiv 47511664169441434718291075092691853899\not\equiv 1\pmod{N}
+$$
+\end{frame}
+\begin{frame}{ECM: An example, cont'd}
+Try many elliptic curves $E$ and a large but not hopelessly large $B$ so that, if $U$ is a factor of $N$, then
+$|E(\mathbf{Z}/U\mathbf{Z})|$ is $B$-powersmooth.
 
+\bigskip\noindent
+Consider the family of elliptic curves $E_{a}:y^2=x^3+ax+1$ which has the obvious point $P=(0,1)$ on it.  
 
+\bigskip\noindent
+Consider $a$ as integers (for example in the range $[-100,100]$) and try $B=10000$.  Let
+$$
+B_{4}=\prod_{p<10000} p^{[\log (10000)/log(p)]}
+$$
+For each $a$, compute
+$[B_4](P)$ in $E_{a}(\mathbf{Z}/N\mathbf{Z})$.  Use the same idea as in modular exponentiation to compute $[B_4](P)$ (repeated doubling of the point).  
 
+\bigskip
+In computing this, you have to do modular inversion mod $N$.  If that fails: you've found a factor of $N$.
+\end{frame}
+\begin{frame}{ECM: an example, cont'd}
+A very naive search finds that 
+$$
+E_{-91}: y^2=x^3-91x+1
+$$  
+gives us our factorization and finds the factor 
+$$N=UV=(59649589127497217)(5704689200685129054721)$$
 
+\bigskip\noindent
+Some quick pseudoprime tests suggests that this is prime (it is) and $U-1$ has a prime divisor with 15 digits and $V-1$
+has a prime factor with $12$ digits,  so this factorization is unlikely to have been found by the $p-1$ method.
+\end{frame}
+\begin{frame}{Lenstra's ECM for theoretical purposes}
+Let $N$ be an integer that is not a prime power and is relatively prime to
+$6$. 
+\begin{enumerate} 
 
+\item Choose integers $v$ and $w$ and set
+$$
+k=\prod_{2}^{w} r^{e(r)}
+$$
+where $e(r)$ is maximal so that 
+$r^{e(r)}\le v+2\sqrt{v}+1.
+$
+\item Draw three elements $a,x_0,y_0$ at random modulo $N$.  Let $b=y_0^2-x_0^3-ax$.  Then $P=(x_0,y_0)$ is a point on the curve
+$E$ with equation $y^2=x^3+ax+b$.  
+\item Try to compute $kP$.  If you find a divisor, cheer! Otherwise, try again until you've tried $h$ times, then give up.
+\end{enumerate}
+Here $v$ serves as bound on the smallest prime factor of $N$ and $w$ a bound on the largest prime divisor of the group of points mod that prime. 
+\end{frame}
+\begin{frame}{Analysis of ECM}
+The method described above will find a divisor provided that the following conditions hold:
+\begin{enumerate}
+\item $N$ has a prime divisor $p\le v$.
+\item The elliptic curve chosen is non-singular mod $p$.
+\item The order of the group of points on that curve is $w$-smooth.
+\item For some \textit{other} divisor $q$ of $N$, $E$ is non-singular mod $q$ and the order of $P$ mod $q$ is NOT divisible by the
+largest prime divisor of the order of $P$ mod $p$. 
+\end{enumerate}
 
+How likely is this to happen?  There is a trade off between time spent on one curve $v,w$ and number of times you try $h$.
 
-	
+\end{frame}
+\begin{frame}{Analysis of ECM, cont'd}
+Lenstra uses  properties of elliptic curves to show the following. Let
+$$
+u=|\{ s: |s-p-1|<\sqrt{p} \hbox{\rm\ and $s$ is $w$-smooth}\}| 
+$$
+So $u$ is the number of $w$-smooth numbers that could possibly be the order of an elliptic curve mod $p$.
+Then the chance that a single attempt at Lenstra's ECM method works (i.e. that a particular $(a,x,y)$ succeeds) is closely related to
+the chance of a smooth group order, or $u/(2\sqrt{p}+1)$. 
 
+\bigskip\noindent
+Conjecture: The chance that a randomly chosen integer in the range $(x-\sqrt{x}+1,x+\sqrt{x}+1)$ is $w$-smooth is the same
+as the chance that a randomly chosen integer of that size is $w$-smooth.
+\end{frame}
+\begin{frame}{Analysis of ECM, cont'd}
+\begin{theorem} Suppose $N$ has two prime divisors, that $p$ is the smallest prime divisor of $N$, and that $N$ is prime to $6$.
+Let $f(w)$ be the probability that a randomly chosen integer in the range $$(p+1-\sqrt{p},p+1+\sqrt{p})$$
+is $w$-smooth.  Assuming $v\ge p$,
+then there is an explicitly computable constant $c$ so that the chance of success of the ECM with parameters $v,w,h$
+is 
+$$1-c^{-hf(w)/\log(v)}.$$
+\end{theorem}
+\end{frame}
+\begin{frame}{Analysis of ECM, cont'd}
+\bigskip\noindent
+Meanwhile, the running time for the algorithm is 
+$$O(hw\log(v)M(N))$$
+ because you have to compute $kP$,
+and 
+$$
+\log k\le w\log(v).
+$$
+\end{frame}
+\begin{frame}{Analysis of ECM, cont'd}
+Let $$
+L(x)=e^{\sqrt{\log(x)\log\log(x)}}.
+$$
 
+\bigskip\noindent
+Lenstra invokes a famous result of Canfield, Erd\"{o}s, and Pomerance that states that the probability that a random positive integer
+$s\le x$  is $L(x)^{\alpha}$-smooth is (asymptotically) 
+$$
+L(x)^{\frac{1}{2\alpha}+o(1)}
+$$
+\end{frame}
+\begin{frame}{Analysis of ECM, cont'd}
+One way to think of the problem is: for a fixed chance of success, minimize running time.  In other words,
+for a fixed value of $hf(w)$, minimize $hw$.  This boils down to minimizing $w/f(w)$.
 
+\bigskip\noindent
+The CEP result says that
+$$
+w/f(w)= O(L(p)^{\frac{1}{2\alpha}+\alpha+o(1)}
+$$
+so the minimum value happens when $\alpha=\frac{1}{\sqrt{2}}$, and, in that case.
+$$
+w/f(w)=O(L(p)^{\sqrt{2}}).
+$$
 
+\bigskip\noindent
+In other words, for a fixed chance of success, the running time behaves like
+$$
+L(p)^{\sqrt{2}}=e^{\sqrt{((2+o(1))\log p\log\log p}}
+$$
+where $p$ is the smallest prime factor of $N$.
+\end{frame}
+\begin{frame}{Further Discussion}
+To make ECM work in practice there are many refinements, including:
+\begin{enumerate}
+\item Using highly optimized elliptic curve operations and modular arithmetic;
+\item Careful choice of parameters (smoothness bound, for example).
+\end{enumerate}
 
+\href{http://swc.math.arizona.edu/aws/2006/notes.html}{Bernstein's notes} from the 2006 Winter School address some of these optimizations.
+\end{frame}
 \end{document}
