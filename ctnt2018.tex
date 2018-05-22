@@ -1,0 +1,237 @@
+\documentclass{beamer}
+\usepackage{minted}
+\newtheorem{proposition}{Proposition}
+\newtheorem{algorithm}{Algorithm}
+\begin{document}
+
+\begin{frame}
+	\begin{center}
+		Lenstra's Elliptic Curve Factoring Method \\
+		Connecticut Number Theory Summer School \\
+		May, 2018 \\
+		\bigskip
+		Jeremy Teitelbaum
+	\end{center}
+\end{frame}
+\begin{frame}{The problem at hand}
+	\begin{problem} Given a positive composite integer $N$, find a proper prime divisor of $N$.
+	\end{problem}
+\end{frame}
+\begin{frame}{Factoring is important}
+
+	{\small
+	Problema, numeros primos a compositis dignoscendi, 
+	hosque in factores suos primos resolvendi, ad gravissima ac utilissima totius arithmeticae pertinere, 
+	...Praetereaque scientiae dignitas requirere videtur, ut omnia subsidia ad solutionem 
+	problematis tam elegantis ac celebris sedulo excolantur.
+	
+	\medskip\noindent
+	The problem of distinguishing prime numbers from composite numbers and of
+	resolving the latter into their prime factors is known to be one of the most
+	important and useful in arithmetic. ..Further, the dignity of the
+	science itself seems to require that every possible means be explored for
+	the solution of a problem so elegant and so celebrated. 
+	
+	\medskip\noindent
+	{\it Gauss,  Disquisitiones Arithmeticae (1801): Article 329}
+	}		
+			
+\end{frame}
+\begin{frame}{Cryptography}
+	\begin{block}{}
+	Gauss thought factoring was important and he was unaware of the role it
+	plays in the security of widely used public-key cryptographic systems.
+	\end{block}
+	\begin{block}{}
+		Although a major reason for current work on the problem, we won't get into the cryptographic applications in this talk.
+	\end{block}
+\end{frame}
+	
+\begin{frame}{Trial division is impractical}
+	
+\begin{block}{}
+	The 'grade school' method to solve the factoring problem by systematically trying integers less than $N$ (or prime numbers less than $N$)
+	and checking to see if you find a factor requires, in the worst case, on the order of $\sqrt{N}$ divisions.  
+\end{block}
+\begin{block}{}
+	If a division takes, say, $10^{-12}$ seconds on some miracle computer, then factoring a $100$ digit number would require
+	$10^{38}$ seconds or more than $10^{30}$ years.  (The universe is about $10^{10}$ years old.)
+\end{block}
+\begin{block}{}
+	A different approach is needed.
+\end{block}
+\end{frame}
+
+\begin{frame}{Overview of factoring methods}
+	Modern methods of factoring fall into two categories:
+	\begin{itemize}
+		\item Methods based on algebraic groups (such as the $p-1$ method, the elliptic curve method, and generalizations)
+		\item Sieve methods (such as the quadratic and number field sieves)
+	\end{itemize}
+\end{frame}
+\begin{frame}{Overview of factoring}
+
+	Typically, the algebraic group methods are used first to identify ``small
+	factors'' of large numbers $N$; and once those are found, or ruled out, the
+	sieve methods are used.
+
+\bigskip\noindent In the best case these algorithms are believed to be
+	sub-exponential, meaning that their running times grow more slowly than
+	exponential in the number of digits of $N$; but they are far from polynomial
+	time.
+
+\bigskip\noindent
+	The complexity of factoring is not known.  
+	
+\bigskip\noindent 
+	There is a polynomial time algorithm for a ``quantum computer.''
+\end{frame}
+\begin{frame}{First make sure your number is composite}
+	The complexity of factoring means factoring algorithms should only be applied to composite numbers.
+
+	\begin{theorem}[Fermat] Suppose that $N$ and $a$ are integers with $(a,N)=1$.  If 
+		$$a^{N-1}\not\equiv 1\pmod{N}.$$
+	then $N$ is composite.
+	\end{theorem}
+\end{frame}
+\begin{frame}{The Fermat Test}
+	Fermat's theorem allows for a quick test of compositeness.  
+	
+	\begin{block}{The Fermat Test}
+	Given $N$ (large), pick a random small $a$ and compute $a^{N-1}\bmod{N}$.
+	If the result isn't $1$, $N$ is composite. 
+	\end{block}
+
+	\begin{definition}
+	If $a^{N-1}\equiv 1\pmod{N}$, then $N$ is called a pseudoprime to base $a$.
+	\end{definition}
+\end{frame}
+\begin{frame}{Pseudoprimes are rare}
+	There are $21853$ pseudoprimes to base $2$ less than $25\times 10^{9}$.
+
+	\bigskip\noindent
+	If a number passes the Fermat test for a bunch of random bases, then spend your time trying to prove it prime
+	rather than trying to factor it.
+
+	\bigskip\noindent
+	There are refinements to the Fermat test that are even more effective.
+
+\end{frame}
+\begin{frame}[fragile]{Efficient Modular Exponentiation}
+	Applying the Fermat Test requires computing $a^x\bmod{N}$ where $x$ is
+	large; and similar calculations are needed in the ECM method as well.
+
+	\begin{proposition} $a^x\bmod{N}$ can be computed in time $O(\log x)$ for fixed $N$ and $a$. 
+	\end{proposition}
+	\begin{algorithm}
+	\begin{verbatim}
+	Set m=1 and s=a.
+	While x>0:
+	   if x is odd, set m=(m*s mod N)
+	   set s=s*s
+	   set x=x/2, rounding off
+	return m as your answer
+	\end{verbatim}
+\end{algorithm}
+\end{frame}
+\begin{frame}{The $p-1$ algorithm}
+	Suppose $N$ is composite.   Then the multiplicative group of units $(\mathbf{Z}/N\mathbf{Z})^*$ is not cyclic, so it is a product of cyclic 
+	groups by the fundamental theorem of abelian groups. 
+
+	\bigskip\noindent
+	The strategy of the $p-1$ method is to
+	\begin{enumerate}
+		\item pick a base $a$ (like $2$);
+		\item try to find an exponent $M$ so that $a^{M}\equiv 1$ in one of the cyclic factors of $(\mathbf{Z}/N\mathbf{Z})^*$ but not all of them. 
+		\item then $(a^{M}-1,N)$ will be a non-trivial factor of $N$.
+	\end{enumerate}	
+
+	\bigskip\noindent
+	If $p$ is an odd prime factor of $N$, then we can try $M=K(p-1)$ for various $K$.  But how to find this $M$ if we don't know $p$?
+
+\end{frame}
+\begin{frame}{Smoothness}
+	\begin{definition}
+	An integer $N$ is called $B$-smooth if all the prime factors of $N$ are at most $B$.  It is called $B$-powersmooth if all the prime
+	powers dividing $N$ are at most $B$.  
+	\end{definition}
+
+	For example, the number
+	$$
+	N=33452526613163807108170062053440751665152000000000
+	$$
+	is $41$-smooth. (It is $41!$).  It is divisible by $2^{164}$ and all the other prime powers dividing $41!$ so $41!$ is
+	$2^{164}+1$ powersmooth.
+
+	
+\end{frame}
+\begin{frame}{The $p-1$ method, 2}
+	
+	The hope for the $p-1$ method is that if $p$ is one  of the prime divisiors of our integer $N$ then $p$ has the property that $p-1$ is $B$-powersmooth
+	for some not too big $B$. 
+
+	\bigskip\noindent
+	Then we take a integer $M$ that is divisible by powers of the primes less than $B$ hoping to get a multiple of $p-1$. 
+	For example, take:
+	$$
+	M=\prod_{p\le B} p^{[\log_{p}(B)]}.
+	$$
+
+	\bigskip\noindent
+	Then compute $(a^{M}-1,N)$ and see what happens.  If you don't find anything, make $B$ bigger.
+
+\end{frame}
+\begin{frame}{A simple example}
+	Suppose $N=F_{5}=2^{2^5}+1$ is the fifth Fermat number.  Take $B=150$.  We can't use $a=2$ because clearly high powers of $a$ are going to be 
+	$-1$ mod $N$; so let's try $a=3$. That doesn't work -- but $a=5$ does. Take $M=(128)*(81)*(25)(49)(121)(13)(17)\cdots(97)\cdots(149)$.  
+	$$
+	5^M-1 \equiv 1741227785\pmod{F_{5}}
+	$$
+	and $(1741227784,F_{5})=641$. 
+\end{frame}
+
+\begin{frame}{The Elliptic Curve Method}
+	For the $p-1$ method to work, we have to be lucky enough to have a prime factor that is $B$-powersmooth for a relatively small $B$.
+	If the number $N$ we are trying to factor doesn't have this property, then the $p-1$ method won't work.
+
+	The elliptic curve method opens the door to more situations in which we can apply the idea of the $p-1$ method.
+\end{frame}
+\begin{frame}{ECM, cont'd}
+	Suppose $N=UV$ where $U$ and $V$ are proper factors.  Let $E$ be an elliptic curve over $\mathbf{Z}$.  Then 
+	$$
+	E(\mathbf{Z}/N\mathbf{Z})=E(\mathbf{Z}/U\mathbf{Z})\times E(\mathbf{Z}/V\mathbf{Z}).
+	$$
+	Suppose that we can find a point $P$ on this curve mod $N$ so that a multiple $K$ of $P$ is zero in the first factor but not the second.
+	
+	\bigskip\noindent
+	If we were to write $E$ in Weierstrass form, and the point $P$ in homogeneous coordinates $[x(P):y(P):z(P)]$, then this condition
+	would mean that $z(KP)$ is divisible by $U$ but not by $V$.  
+	
+	\bigskip\noindent
+	In other words, $(z(KP),N)$ would give us a proper factor of $N$.
+\end{frame}
+\begin{frame}{ECM,3}
+
+	If we were fortunate enough that (say) the order of the  first of the two factor groups
+	$n=|E(\mathbf{Z}/U\mathbf{Z})|$ were $B$-powersmooth for a (relatively) small $B$.
+	Then we could use the trick of the $p-1$ method and choose our $K$ to hopefully be divisible by $n$.
+
+	The Riemann hypothesis for elliptic curves over finite fields tells us that if $U$ is prime then $n$ is roughly $p$.
+	So the chance that $n$ is $B$-powersmooth is the same order as $p-1$ having that property.
+
+	But there are many elliptic curves! 
+\end{frame}
+
+
+
+
+
+
+
+	
+
+
+
+
+
+\end{document}
