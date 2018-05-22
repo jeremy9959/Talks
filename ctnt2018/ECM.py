@@ -1,16 +1,17 @@
 # %load ec3.py
 from math import factorial, gcd, log
 import numpy as np
-P=np.zeros(1000)
+
+P=np.zeros(10000)
 P[0]=1
 P[1]=1
-for i in range(2,100):
+for i in range(2,10000):
     if P[i]==0:
         j=2
-        while i*j<100:
+        while i*j<1000:
             P[i*j]=1
             j=j+1
-Primes1000=[i for i,x in enumerate(P) if x==0 ]  
+Primes10000=[i for i,x in enumerate(P) if x==0 ]  
 
 
 def mexp(a,x,N):
@@ -105,8 +106,54 @@ def ecm_trial(N,arange=50,krange=30):
 #ecm_trial(N,arange=20,krange=10000)
 N=2**128+1
 #ecm_trial(N,arange=100,krange=10000)
-xm,ym=exp_p(0,1,-91,1,factorial(7883),N)
+#xm,ym=exp_p(0,1,-91,1,factorial(7883),N)
                                                                                                                                     
-                                            
+                                                                                                                                    
+def ecm(N,arange=100,krange=10000):
+    for a in range(-arange,arange):
+        x,y=0,1
+        print(a)
+        for B in Primes10000:
+            k=B**(int(log(10000)/log(B)))
+            sx,sy,t=x,y,k
+            first=True
+            while t>0:
+                if t%2==1:
+                    if first:
+                        xm,ym=sx,sy
+                        first=False
+                    else:
+                        # x1=xm,y1=ym, x2=sx,y2=sy,a=a,b=1,N=N
+                        d,u,v=euclid(sx-xm,N)
+                        if d>1:
+                            if d==N:
+                                break
+                            else:
+                                return d
+                        L=(u*(sy-ym)) % N
+                        x_sum=(L*L-xm-sx) % N
+                        ym=(L*(xm-x_sum)-ym) % N
+                        xm=x_sum
+                # sx=x,sy=y,a=a,b=1,N
+                d,u,v=euclid(2*sy,N)
+                if d>1:
+                    if d==N:
+                        break
+                    else:
+                        return d
+                L=(u*(3*sx*sx+a)) % N
+                x2=(L*L-2*sx) % N
+                sy=(L*(sx-x2)-sy) %N
+                sx=x2
+                t=t//2
+            x,y=xm,ym
+    print('Failed')
+
+
+
+N=2**(128)+1
+print('answer is', ecm(N,arange=100,krange=10000),flush=True)
+
+
 
 
