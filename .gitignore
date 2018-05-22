@@ -246,3 +246,4 @@ TSWLatexianTemp*
 *.spl
 
 .ipynb_checkpoints/
+.vscode/
