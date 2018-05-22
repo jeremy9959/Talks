@@ -20,7 +20,6 @@ def ecm(N,arange=100,krange=10000):
                         xm,ym=sx,sy
                         first=False
                     else:
-                        # x1=xm,y1=ym, x2=sx,y2=sy,a=a,b=1,N=N
                         d,u,v=gmpy2.gcdext(sx-xm,N)
                         if d>1:
                             if d==N:
@@ -31,7 +30,6 @@ def ecm(N,arange=100,krange=10000):
                         x_sum=(L*L-xm-sx) % N
                         ym=(L*(xm-x_sum)-ym) % N
                         xm=x_sum
-                # sx=x,sy=y,a=a,b=1,N
                 d,u,v=gmpy2.gcdext(2*sy,N)
                 if d>1:
                     if d==N:
