@@ -182,7 +182,7 @@
 \end{frame}
 \begin{frame}{A simple example}
 	Suppose $N=F_{5}=2^{2^5}+1$ is the fifth Fermat number.  We can't use $a=2$ because clearly high powers of $a$ are going to be 
-	$-1$ mod $N$; so let's try $a=3$. That doesn't work -- but $a=5$ does. Take $M=10!$.  
+	$-1$ mod $N$. Let's try $a=5$ instead. Take $M=10!$.  
 	$$
 	5^M-1 \equiv 1869036133\pmod{F_{5}}
 	$$
@@ -190,7 +190,7 @@
 \end{frame}
 
 \begin{frame}{The Elliptic Curve Method}
-	For the $p-1$ method to work, we have to be lucky enough to have a prime factor that is $B$-powersmooth for a relatively small $B$.
+	For the $p-1$ method to work, we have to be lucky enough to have a prime factor $p$ of $N$ so that $p-1$ is $B$-powersmooth for a relatively small $B$.
 
         \bigskip\noindent
 	If the number $N$ we are trying to factor doesn't have this property, then the $p-1$ method won't work.
@@ -281,7 +281,7 @@ $$
 where $e(r)$ is maximal so that 
 $r^{e(r)}\le v+2\sqrt{v}+1.
 $
-\item Draw three elements $a,x_0,y_0$ at random modulo $N$.  Let $b=y_0^2-x_0^3-ax$.  Then $P=(x_0,y_0)$ is a point on the curve
+\item Draw three elements $a,x_0,y_0$ at random modulo $N$.  Let $b=y_0^2-x_0^3-ax_0$.  Then $P=(x_0,y_0)$ is a point on the curve
 $E$ with equation $y^2=x^3+ax+b$.  
 \item Try to compute $kP$.  If you find a divisor, cheer! Otherwise, try again until you've tried $h$ times, then give up.
 \end{enumerate}
@@ -375,3 +375,8 @@ To make ECM work in practice there are many refinements, including:
 \href{http://swc.math.arizona.edu/aws/2006/notes.html}{Bernstein's notes} from the 2006 Winter School address some of these optimizations.
 \end{frame}
 \end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
