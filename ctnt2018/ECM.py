@@ -54,13 +54,21 @@ def ecm(N,arange=100,krange=10000):
 # Richard Brent, John Pollard
 # Mathematics of Computation, Volume 36, Number 154, April 1981
 #V=1238926361552897
-N=2**(256)+1
-print('Factor of F8', ecm(N,arange=100,krange=10000),flush=True)
+#N=2**(256)+1
+#print('Factor of F8', ecm(N,arange=100,krange=10000),flush=True)
 
 # These smaller factors were found in 1988 by Brent
 
 N=2**(2**11)+1
-print('Factor of F11', ecm(N,arange=100,krange=10000),flush=True)
+d1=ecm(N,arange=100,krange=10000)
+print(d1)
+d2=ecm(N//d1)
+print(d2)
+M=N//(d1*d2)
+d3=ecm(M)
+print(d3)
+d4=ecm(M//d3)
+print('Factors of F11',d1,d2,d3,d4,flush=True)
 
 
 
