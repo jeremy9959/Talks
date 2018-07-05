@@ -16,14 +16,14 @@
 \end{frame}
 
 \begin{frame}{Graph Embedding}
-  \begin{problem} Given a (finite, though large) graph $G$ that represents some type of relationship among
+  \begin{problem} Given a (finite, but large) graph $G$ that represents some type of relationship among
     entities, and an integer $n$,  find a map $f:G\to \mathbf{R}^{n}$ that captures interesting features of the graph.
   \end{problem}
 
   
 \end{frame}
 \begin{frame}{Deep Learning}
-  \begin{definition} \textbf{Deep Learning} is a buzzword that refers to a class of machine learning algorithms
+  \begin{definition} \textbf{Deep Learning} is a  buzzword that refers to a class of machine learning algorithms
     that exploit a hierarchical, non-linear structure.
   \end{definition}
 \end{frame}
@@ -100,19 +100,16 @@ TexasA&M     [ 3] OklahomaStat [ 3] IowaState    [ 3] Nebraska     [ 3] Iowa    
 \begin{frame}
 
   Computing these probabilities in a large network is not feasible. We seek a dimension reduction
-  in the form of a map $$n\mapsto u_n:V\to \mathbf{R}^{k}$$
+  in the form of two maps $$\begin{matrix}n\mapsto u_n \\ n\mapsto v_n\end{matrix}:V\to \mathbf{R}^{k}$$
   with the property that, if $n$ and $m$ are nodes of $V$, then 
   $$
-  p(n|m)=\frac{\exp(u_n\cdot u_m)}{\sum_{m} \exp(u_n\cdot u_m)}
+  p(n|m)=\frac{\exp(u_m\cdot v_n)}{\sum_{n} \exp(u_m\cdot v_n)}
   $$
-  is a good approximation to the $P_{w}$. Here $u_n\cdot u_m$ is the 'dot product':
+  is a good approximation to the $P_{w}$. Here $u_m\cdot v_n$ is the 'dot product':
   $$
-  (u_m^{(1)},u_m^{(2)},\ldots,u_m^{(k)})\cdot (u_n^{(1)},u_n^{(2)},\ldots,u_n^{(k)})=\sum u_{m}^{i}u_{n}^{i}
+  (u_m^{(1)},u_m^{(2)},\ldots,u_m^{(k)})\cdot (v_n^{(1)},v_n^{(2)},\ldots,u_n^{(k)})=\sum u_{m}^{i}v_{n}^{i}
   $$
   
-  One way to think of this is that the log-probability that node $n$ occurs 'near' node $m$ in a random walk
-  centered at $m$ is proportional to $u_n\cdot u_m$.  
-
   The vectors $u_n$ give the graph embedding.
 
 \end{frame}
@@ -146,7 +143,7 @@ TexasA&M     [ 3] OklahomaStat [ 3] IowaState    [ 3] Nebraska     [ 3] Iowa    
   \end{frame}
   
   \begin{frame}{Maximum Likelihood}
-    The vectors $u_n$ associated to nodes in the graph $G$ are selected by the maximum likelihood principle.
+    The vectors $u_m,v_n$ associated to nodes in the graph $G$ are selected by the maximum likelihood principle.
 
     \bigskip\noindent
     The Likelihood of an observation given a set of probabilities is just the chance of that observation for the given probabilities. In maximum likelihood estimation, one adjusts the probabilities until the likelihood of the observed data is maximal for all possible choices of probabilities.
@@ -167,7 +164,7 @@ TexasA&M     [ 3] OklahomaStat [ 3] IowaState    [ 3] Nebraska     [ 3] Iowa    
     If done carefully this will converge to a good estimate of the maximum likelihood.
   \end{frame}
   \begin{frame}{The Football Example}
-    We can run the deepwalk code against the football example, which has 115 teams, and 613 games.  We choose
+    We can still run the deepwalk code against the football example, which has 115 teams, and 613 games.  We choose
     an embedding into 20 dimensional space so we end up with 2300 numbers.
     (For reference the adjacency matrix of the graph has about 6500 numbers).
 
@@ -180,3 +177,8 @@ TexasA&M     [ 3] OklahomaStat [ 3] IowaState    [ 3] Nebraska     [ 3] Iowa    
     
     
 \end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
