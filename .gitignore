@@ -245,10 +245,9 @@ TSWLatexianTemp*
 # generated if using elsarticle.cls
 *.spl
 
-<<<<<<< HEAD
 #
 .ipynb_checkpoints/
-=======
-.ipynb_checkpoints/
-.vscode/
->>>>>>> develop
+
+#
+*~
+\#*\#
