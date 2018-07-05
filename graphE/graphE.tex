@@ -169,13 +169,18 @@ TexasA&M     [ 3] OklahomaStat [ 3] IowaState    [ 3] Nebraska     [ 3] Iowa    
     (For reference the adjacency matrix of the graph has about 6500 numbers).
 
     Applying TSNE to the result we get the following picture, colored by the conference that the teams belong to.
-    \includegraphics[width=4in]{football_clusters.png}
 
+    \includegraphics[width=4in]{football_clusters.png}
  \end{frame}
-  
-    
-    
-    
+ \begin{frame}{Remarks for further study}
+   \begin{block}{Optimizing the computation}
+     Computing the softmax function is very inefficient because the normalization step requires a sum
+     over all of the nodes of the graph.  \textit{Negative Sampling} and \textit{Hierarchical Softmax} are approaches to dealing with this bottleneck.
+   \end{block}
+   \begin{block}{Modifying the algorithm and adjusting the hyperparameters}
+     There are many ways to vary the way the random walk is carried out, and one can vary the lengths of the walks and the number of nodes chosen within each random walk.  One can also modify the way the random walk is constructed (for example, by weighting the edges in some way).  The program \texttt{node2vec} has many capabilities of this type.
+     \end{block}
+\end{frame}    
 \end{document}
 
 %%% Local Variables:
