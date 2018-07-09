@@ -1,0 +1,6 @@
+{
+  "name": "Talks",
+  "tagline": "selected talks by Jeremy Teitelbaum",
+  "body": "|Directory | Contents |\r\n|---|---| \r\n|ctnt2018 | [ECM Method @ Connecticut Number Theory Week, June, 2018](ctnt2018/ctnt2018.pdf) |\r\n|graphE | [Random Walk methods @ JAX working group on graph embedding, July 2018](graphE/graphE.pdf)|\r\n\r\n",
+  "note": "Don't delete this file! It's used internally to help with page regeneration."
+}
