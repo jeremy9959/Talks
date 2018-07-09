@@ -1,10 +1,9 @@
-Jeremy Teitelbaum
-Jeremy Teitelbaum..
-Department of Mathematics..
-University of Connecticut..
-Storrs, Connecticut 06269..
-[http://teitelbaum.math.uconn.edu](http://teitelbaum.math.uconn.edu)..
-[mailto:jeremy.teitelbaum@uconn.edu](mailto:jeremy.teitelbaum@uconn.edu)..
+Jeremy Teitelbaum   
+Department of Mathematics   
+University of Connecticut   
+Storrs, Connecticut 06269   
+[http://teitelbaum.math.uconn.edu](http://teitelbaum.math.uconn.edu)  
+[mailto:jeremy.teitelbaum@uconn.edu](mailto:jeremy.teitelbaum@uconn.edu)  
 
 |Directory | Contents |
 |---|---| 
