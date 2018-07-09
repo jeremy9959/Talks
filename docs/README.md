@@ -1,5 +1,6 @@
-# Recent Talks
-## Jeremy Teitelbaum 
+## Recent Talks
+
+### Jeremy Teitelbaum 
 
 |Directory | Contents |
 |---|---| 
