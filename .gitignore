@@ -245,9 +245,9 @@ TSWLatexianTemp*
 # generated if using elsarticle.cls
 *.spl
 
-#
 .ipynb_checkpoints/
+.vscode/
 
-#
+# emacs
 *~
 \#*\#
