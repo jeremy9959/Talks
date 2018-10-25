@@ -1,0 +1,179 @@
+After more than 10 years in administration, including 9 as Dean of
+Arts and Sciences and 1 as interim Provost at UConn, I have returned
+to my faculty position.  I am spending a year as a visiting scientist
+at the Jackson Laboratory for Genomic Medicine (JAX-GM) in Farmington,
+Connecticut, trying to get a grip on some of the mathematical problems
+of interest to researchers in cancer genomics.  In this talk, I will offer some personal
+observations about being a mathematician and a high-level administrator, talk a bit about
+the research environment at an independent research institute like JAX-GM, outline
+a few problems that I've begun to learn about, and conclude with a
+discussion of how these experiences have shaped my view of graduate training in mathematics.
+
+Observations as an administrator
+Challenges/pleasures of administration:
+		     intellectual diversity
+		     other types of diversity
+		     truly intractable problems
+		     teamwork
+		     opportunity to be a force for good
+issues:
+	- doubts about  the curriculum
+	- isolation of the department
+	- stubbornly slow process of diversification
+	
+broader observations:
+	-- length of academic career is a challenge for many people; change can be good.
+	-- relative impermeability of academic mathematics
+
+
+Jackson Labs
+
+Founded 1929 in Bar Harbor Maine
+Originally supported by Edsel Ford and Roscoe Jackson (Hudson Motor cars)
+Home of mouse genetics
+26 Nobel Prizes associated with JAX
+George Snell, JAX Faculty, won in 1980 for genetics of the immunte system.
+Huge business in mice  -- 3M mice per year
+88M per year grant support
+256M per year in the mouse business and other services
+Mouse genome database
+New facility in Connecticut dedicated to 'precision medicine'
+ -- 350 employees
+ ~ 30 faculty
+ huge technical support infrastructure
+  -- information technology and "computational services"
+  -- imaging
+  -- sequencing
+  
+Math departments think of NSA or Finance as places where there are jobs for PhD's.
+Place like JAX offers a research environment (no teaching) but can be a steady job -- compare
+for example with a permanenent teaching faculty job.
+
+Here's a sample job ad:
+
+Responsibilities
+
+The successful candidate will develop and apply computational methods
+for genomic data analyses, have novel opportunities at the
+intersection of algorithms, data interpretation, and experimental
+design in close collaboration with the experimental team in the
+lab. The applicant is expected to have Ph.D. in computational biology,
+cancer genomics, or a similar discipline, and demonstrate strong
+computing expertise, publication, and communication skills. We also
+consider exceptional applicants who are new to computational biology,
+including statistics, applied math, physics, and computer science.
+
+Qualifications
+
+    PhD. in a quantitative area: computational biology, computer science, statistics, physics and applied math
+
+    Programming in R, Python, Perl or C++
+
+    Experience in genomic dataset analysis and integration
+
+    Three (3) years of postdoctoral training or equivalent research experience, and demonstrated meritorious scientific performance.
+
+    Strong publication record (two or more peer-reviewed publications).
+
+    Ability to integrate and apply feedback in a professional manner, prioritize and drive to results with a high emphasis on quality, and work as part of a team.
+
+    Proven ability to analyze and synthesize information, and demonstrated resourcefulness in finding appropriate solutions to problems and initiative in presenting alternatives and implementing	solutions to ensure effective change and/or eliminate or mitigate potential negative effects.
+
+    Exceptional organizational and project management skills, including the ability to plan, schedule, and successfully carry out multiple projects at the same time to successful conclusion with	 minimal supervision.
+
+Quality orientated including delivering accuracy and attention to detail.
+
+
+Some examples of people at JAX -- many non-biologists -- changing field draws in people from lots of areas.
+
+Jeff Chuang (Assoc Prof, faculty member) PhD from MIT in statistical physics
+Bill Flynn, "Application computational scientist", PhD in Physics (large molecules) from Rutgers
+Vida Ravanmehr, PhD in Electrical/Computer Engineering (working on error correcting codes) BA/MA in Applied Math
+Peter Robinson (Professor), BA and MS in Computer Science, MD from Penn.
+
+But not many math PhD's (pure or applied) overall.
+
+What are they working on?
+
+Many different things, but here are two examples of problems.
+
+1. (Robinson group)  The Human Phenotype Ontology (HPO)
+
+Phenotype = symptom.  HPO is a large directed acyclic graph, where each node represents a symptom/phenotype and they are classified
+from general to specific.  Items ("terms") in the HPO are curated by experts.
+For example:
+[Term]
+id: HP:0010082
+name: Symphalangism affecting the distal phalanx of the hallux
+synonym: "Fused outermost bone of big toe" EXACT layperson [ORCID:0000-0001-5208-3432]
+xref: UMLS:C4024063
+is_a: HP:0001859 ! Distal foot symphalangism
+is_a: HP:0010053 ! Abnormality of the distal phalanx of the hallux
+is_a: HP:0010091 ! Symphalangism affecting the proximal phalanx of the hallux
+is_a: HP:0010191 ! Symphalangism affecting the distal phalanges of the toes
+created_by: doelkens
+creation_date: 2009-05-29T12:16:28Z
+
+DAG is annotated by (mendelian genetic) diseases (So a disease is a subtree of the ontology)
+
+Possible applications:
+useful for clinical studies because it nails down symptoms in a systematic nomenclature.
+Can be used for more interesting problems --  given a set of symptoms, find potential diseases consistent with those symptoms.
+This type of reasoning problem from ontologies has a long history.
+(give examples)
+
+Also used to identify cross-species similarities and to find appropriate animal models
+And to try to pair specific genetic variants with diseases.
+
+2.  (Chuang group) broader problem: tumor evolution.  Typical tumor is made up of subpopulations of cells with common
+genetic profile.  Some of these subpopulations might be susceptible to treatment with a particular chemotherapy agent
+to which others are resistant.
+
+Patient-derived xenografts (PDX): take tumors from people, grow them in immuno suppressed mice so there is space to experiment on them.
+
+Some attempts to reconstruct history of cell populations using ideas from evolutionary biology, but still an active area of research
+
+Management of PDX studies is a large complicated business.
+
+Key tool is sequencing -- different types -- DNA, RNA, single-cell.
+My current project is to look at issues in single cell RNA sequencing, so here is a brief overview.
+
+Recall how genetics works: DNA -> mRNA -> protein
+Different cells in your body have same* DNA but different expression profiles -- different levels of mRNA and so different collection of proteins.
+
+Prior technology (RNA-seq) looked at a sample from a mixture of cells and computed the relative abundance of different mRNA molecules.
+So a typical RNA-seq experiment might take 3 replicates of a control and 3 of a treatment (say drugs or whatever) and compute the expression levels
+of the genes in the two cases, then try to draw conclusions.  So you have a matrix with 30000 genes and six samples.  Various strategies to extract
+meaning from this situation.
+
+single-cell works differently.  Cells get sequenced one at a time and you get an expression profile for all of the genes for each cell.
+Result might be an integer matrix of 3000 cells by 30000 genes.  Each integer counts the number of mRNA associated with that gene.
+
+BUT: the data is confounded because the small amounts of material in each cell mean that many things DON't get counted that should.  So the
+matrix has lots and lots of zeros.
+
+A typical goal is:
+  -- to cluster the cells by their expression profiles;
+  -- identify the genes whose expression levels characterize the clusters;
+  -- find a biological interpretation for these genes.
+
+In the context of tumor heterogeneity, perhaps the clusters might be associated with certain biochemical pathways that can be targeted with particular drugs.
+
+Example of one  associated statistical model (there are many proposals for this):
+
+Typical approach would be to use principal componenet analysis or some fancier method to reduce the dimension and identify clusters.
+
+Problem: How to deal with the issues of:
+	 -- normalization of the data 
+	 -- what effect does the dropout have on the dimensionality reduction?
+	 -- should one try to impute the zero values?  if so, how?	  
+
+
+
+
+
+
+
+
+
+

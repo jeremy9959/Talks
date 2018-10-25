@@ -1,0 +1,33 @@
+1	 All
+40195	 Decreased head circumference
+2060	 Abnormality of the cerebrum
+11282	 Abnormality of hindbrain morphology
+11283	 Abnormality of the metencephalon
+152	 Abnormality of head or neck
+12443	 Abnormality of brain morphology
+924	 Abnormality of the skeletal system
+2078	 Truncal ataxia
+1311	 Abnormal nervous system electrophysiology
+2977	 Aplasia/Hypoplasia involving the central nervous system
+929	 Abnormality of the skull
+9121	 Abnormal axial skeleton morphology
+1317	 Abnormality of the cerebellum
+2353	 EEG abnormality
+11442	 Abnormality of central motor function
+11443	 Abnormality of coordination
+11842	 Abnormality of skeletal morphology
+100547	 Abnormality of forebrain morphology
+7364	 Aplasia/Hypoplasia of the cerebrum
+707	 Abnormality of the nervous system
+12759	 Neurodevelopmental abnormality
+2011	 Morphological abnormality of the central nervous system
+12638	 Abnormality of nervous system physiology
+12639	 Abnormality of nervous system morphology
+1249	 Intellectual disability
+1250	 Seizures
+1251	 Ataxia
+30178	 Abnormality of central nervous system electrophysiology
+234	 Abnormality of the head
+240	 Abnormality of skull size
+118	 Phenotypic abnormality
+252	 Microcephaly
