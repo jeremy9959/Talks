@@ -187,9 +187,11 @@ So we may view each image as a vector in $\R^{784}$.
   \frametitle{The high-dimensional similarity}
   The distance $P_{j|i}$ constructed above is not symmetric.  To rectify this, the t-SNE algorithm symmetrizes it.
 \bigskip\noindent
+
   One way to think of this is to consider the fact that the relation ``$p$ is one of the $k$ points closest to $q$'' is not symmetric.
   Making $P_{j|i}$ symmetric is an analytic way of creating the symmetric relation ``$p$ is one of the $k$ points closest to $q$, or vice versa.''
   \bigskip\noindent
+
   This brings outlier points into fuller consideration when constructing the low-dimensional map.
 \end{frame}
 
@@ -288,6 +290,7 @@ There are both repulsive and attractive forces at work.
   One can efficiently find the $k$ closest points using, for example, {\it vantage points trees.}  These are a data structure specifically
   designed for this purpose.
   \bigskip\noindent
+
   This makes $P$ sparse -- there are only a few non-zero entries in each row.
 \end{frame}
 \begin{frame}
@@ -298,6 +301,7 @@ For the gradient descent phase, one can use a variant of the Barnes-Hut techniqu
   $$
   where $q_{ij}Z=(1+\|y_i-y_j\|^2)^{-1}$ takes constant time to compute.
   \bigskip\noindent
+
   The first sum requires adding terms corresponding to non-zero entries in $p_{ij}$, which is sparse, so this takes time $O(N)$.
  \end{frame}
  \begin{frame}
@@ -306,6 +310,7 @@ For the gradient descent phase, one can use a variant of the Barnes-Hut techniqu
    that if a bunch of points $y_i$ are close together, one may approximate their contribution to the force by replacing them with their
    center of mass.
    \bigskip\noindent
+
    The BH algorithm partitions space into cubes that are small enough that the center of mass of the points in each cube are a good summary of the data.
  \end{frame}
  \begin{frame}
@@ -321,6 +326,7 @@ For the gradient descent phase, one can use a variant of the Barnes-Hut techniqu
 
    Hinton and van der Maaten, Visualizing High Dimensional Data with t-SNE, Journal of Machine Learning Research, 2008
    \bigskip\noindent
+
    van der Maaten, Accelerating t-SNE using Tree-Based Algorithms, Journal of Machine Learning Reserach, 2014.
  \end{frame}
  
