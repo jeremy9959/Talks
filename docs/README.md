@@ -13,5 +13,6 @@ Storrs, Connecticut 06269
 - [Lessons Learned and New Perspectives @ UW-Madison Math Colloquium, October, 2018](./wisconsin.pdf)
 - [Clustering @ UConn Math Club, November, 2018](./clustering.pdf)
 - [Random Matrix Theory and Single Cell Analysis after Rabadan, et. al. @ JAX Computational Sciences Seminar, January, 2019](./jax_random_matrices.pdf)
+- [t-SNE @ UConn Sigma Seminar, October, 2019](./sigma.pdf)
 
 [Jump to GitHub repository](http://github.uconn.edu/jet08013/Talks.git)
