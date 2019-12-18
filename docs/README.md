@@ -14,6 +14,6 @@ Storrs, Connecticut 06269
 - [Clustering @ UConn Math Club, November, 2018](./clustering.pdf)
 - [Random Matrix Theory and Single Cell Analysis after Rabadan, et. al. @ JAX Computational Sciences Seminar, January, 2019](./jax_random_matrices.pdf)
 - [t-SNE @ UConn Sigma Seminar, October, 2019](./sigma.pdf)
-- [Topological Hierarchical Clustering](./20190924.pdf) 
+- [Topological Hierarchical Clustering](./20190924.pdf)  in the UConn Clustering Seminar, Fall, 2019.
 
 [Jump to GitHub repository](http://github.uconn.edu/jet08013/Talks.git)
