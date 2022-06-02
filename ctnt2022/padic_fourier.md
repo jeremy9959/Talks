@@ -21,33 +21,14 @@ Let $G$ be an compact topological group that is abelian.
 - $G$ is an abelian group
 - the group operations are continuous
 
-Examples:
+Example:
 
 - $G=\{z\in\mathbb{C}: |z|=1\}$, so $G$ is the circle group $\mathbb{T}$.
-- $G$ is any finite abelian group.
-- $G$ is the additive group of $p$-adic integers $\mathbb{Z}_{p}$
-- $G$ is the multiplicative group of $p$-adic units $\mathbb{Z}_{p}^{*}$
 
-## Haar Measure
-
-A compact abelian group $G$ has a unique invariant measure $\mu$ such that $\mu(G)=1$.
-
-"Invariant" means $\mu(gX)=\mu(X)$ for subsets $X$ of $G$.
-
-On $\mathbb{T}$ this is Lebesgue measure.
-
-On a finite group it is the measure that assigns mass $|G|^{-1}$ to each point.
-
-On $\mathbb{Z}_{p}$, we have
-$$
-\mu(a+p^{n}\mathbb{Z}_{p})=1/p^{n}
-$$
-because
-$$\mathbb{Z}_{p}=\coprod_{a=0}^{p^{n}-1} (a+p^{n}\mathbb{Z}_{p}).$$
 
 ## Characters and the dual group
 
-A **character** of a compact abelian group $G$ is a continuous homomorphism $\phi:G\to \mathbb{T}$.
+A **character** of $G=\mathbb{T}$ is a continuous homomorphism $\phi:G\to \mathbb{T}$.
 
 The set of characters $X(G)$ form an abelian topological group in their own right. This is called the **dual group**
 to $G$.
@@ -58,10 +39,6 @@ $$
 $$
 where $n\in\mathbb{Z}$ and $X(\mathbb{T})=\mathbb{Z}$. 
 
-When $G$ is finite, the character group $X(G)$ is a finite group isomorphic to $G$. To see this:
-
-- If $G=\mathbb{Z}/n\mathbb{Z}$, then $X(G)$ is isomorphic to the cyclic group group $\mu_{n}$ of $n^{th}$-roots of unity via $\phi\mapsto \phi(1)$. 
-- Now use the fundamental theorem of abelian groups.
 
 ## Distributions 
 
@@ -85,7 +62,7 @@ $$
 
 This function is called the Fourier transform of $\lambda$.
 
-## Examples 1: $G=\mathbb{T}$
+## Examples
 
 If $G=\mathbb{T}$, then:
 
@@ -93,24 +70,6 @@ If $G=\mathbb{T}$, then:
 - the function $F_{\lambda}(n)$ gives the Fourier coefficients
 of $g_{\lambda}$ because
 $$F_{\lambda}(n)=\langle z^{n},g_{\lambda}\rangle = \int_{\theta=0}^{2\pi} e^{in\theta}\sum_{m\in\mathbb{Z}} \overline{a(m)}e^{-im\theta}d\theta = \overline{a(n)}$$
-
-## Examples 2: $G$ finite
-
-The functions on $G$ are a finite dimensional space whose basis are the characteristic functions $\chi_{g}$ satisfying
-$$
-\chi_{g}(h)=\begin{cases} 1 & g=h \\ 0 & g\not=h \end{cases}
-$$
-
--  the distributions are spanned by the "dirac distributions" which are dual to the characteristic functions
-$$
-\delta_g(f) = f(g).
-$$
-- All together the distributions on $G$ are the group algebra $\mathbb{C}[G]$.
--  If $\lambda=\sum_{g}a(g)g$ and $\phi\in X(G)$ then 
-$$
-F_{\lambda}(\phi)=\sum_{g} a(g)\phi(g).
-$$
-- this is the *discrete fourier transform*.
 
 ## Key ingredients
 
@@ -126,7 +85,7 @@ $$
 
 In $p$-adic Fourier theory the ingredients are:
 
-- $\mathbb{G}=\mathbb{Z}_{p}$ or $G=\mathbb{Z}_p^{*}$.
+- $\mathbb{G}=\mathbb{Z}_{p}$ (or $G=\mathbb{Z}_p^{*}$.)
 - The space of continuous functions $C(G,K)$ where $K$ is a complete extension field of $\mathbb{Q}_{p}$.
 - The space $X(G)$ of continuous characters $\phi: G\to K^{*}$.
 - Distributions are continuous linear maps $C(G,K)\to K$.
@@ -140,48 +99,6 @@ $F_{\lambda}(\phi)=\lambda(\phi)$.
 - The group $\mathbb{Z}_p$ is totally discontinuous (every open set is closed) so there are many more continuous functions from $\mathbb{Z}_p$ to $K$ than from $\mathbb{Z}_p$ to $\mathbb{C}$. 
 For example, locally constant functions are continuous.
 
-## $\mathbb{Z}_p^{*}$ and $\mathbb{Z}$ are almost the same (p>2)
-
-**Proposition**:  The group $\mathbb{Z}_p^{*}$ is isomorphic to the product
-$$
-\mu_{p-1}\times (1+p\mathbb{Z}_p)
-$$
-where $\mu_{p-1}$ is the finite group of $(p-1)^{st}$ roots of 1.
-
-**Proof:** 
-
-- Hensel's lemma applied to $x^{p-1}-1=0$ gives $\mu_{p-1}\subset\mathbb{Z}_{p}^{*}$ since this polynomial factors into linear factors mod $p$.
-- There's one element of $\mu_{p-1}$ in each congruence class.  So every element $a\in\mathbb{Z}_{p}^{*}$
-can be written uniquely as 
-$$
-a=\omega(a)\langle a\rangle
-$$
-where $\omega(a)\in\mu_{p-1}$ and $\langle a \rangle \in 1+p\mathbb{Z}_{p}$.
-
-## $\mathbb{Z}_p^{*}$ and $\mathbb{Z}_p$ are almost the same (p>2)
-
-The power series 
-$$
-\frac{1}{p}\log(1+x)=\frac{1}{p}(x-\frac{x^2}{2}+\frac{x^3}{3}-\frac{x^4}{4}+\ldots)
-$$
-converges for any $1+x\in 1+p\mathbb{Z}_p$ and satisfies $\log((1+x)(1+y))=\log(1+x)+\log(1+y)$.
-
-The power series
-$$
-\exp(px)=1+px+\frac{(px)^2}{2!}+\frac{(px)^3}{3!}+\ldots
-$$
-converges for $x\in\mathbb{Z}_p$ and satisfies $\exp(p(x+y))=\exp(px)\exp(py)$. The power of $p$
-in $n!$ satisfies
-$$
-\mathrm{ord}_p(n!)<\frac{n}{p-1}.
-$$
-
-## exp and log
-
-The maps $\frac{1}{p}\log(1+x)$ and $\exp(px)$ 
-give mutually inverse (group) isomorphisms between $1+\mathbb{Z}_p$ and $\mathbb{Z}_p$.
-
-So $1+p\mathbb{Z}_p$ (under multiplication) is isomorphic to $\mathbb{Z}_p$ (under addition).
 
 ## Continuous functions on $\mathbb{Z}_p$
 
@@ -259,8 +176,7 @@ $$
 If $f:\mathbb{Z}_p\to K$ one can still construct this series and if it makes sense it will agree with
 $f$ on the integers, and then by continuity on all of $\mathbb{Z}_p$.  
 
-To prove convergence you need to show that the coefficients $\Delta^{i}(f)_{x=0}$ go to zero $p$-adically.  A detailed proof is given by Conrad
-(google "conrad mahlerexpansions")
+To prove convergence you need to show that the coefficients $\Delta^{i}(f)_{x=0}$ go to zero $p$-adically.  A detailed proof is given by Conrad -- see the references. 
        
 ## Characters
 
@@ -300,9 +216,12 @@ $$
 
 A linear map $\lambda:C(G,K)\to K$ is continuous if and only if it is bounded:
 $$
-\sup_{f} \|\lambda(f)\|_p <\infty.
+\sup_{f} \|\lambda(f)\|_p <C\|f\|
 $$
-It is enough to check this on the set of binomial polynomials $\binom{x}{n}$.
+for some constant $C$.
+It is enough to check this on the set of binomial polynomials $\binom{x}{n}$, which have sup-norm $1$.
+
+## Distributions continued 
 
 **Proposition:** The space $D(G,K)$ of continuous linear maps $C(G,K)\to K$ is isomorphic (as a Banach space)
 to the space of bounded sequences $(b(n))_{n=0}^{\infty}$ with entries in $K$, where
