@@ -11,7 +11,7 @@ author:
 1. Brief look at classical fourier analysis for motivation
 2.  Continuous functions on $\mathbb{Z}_p$ and Mahler's Theorem
 3.  Distributions, characters, and the Iwasawa algebra
-4.  The Kubota-Leopoldt p-adic zeta function.
+4.  A look ahead
 
 ## Classical Fourier Analysis
 
@@ -49,7 +49,7 @@ $$\mathbb{Z}_{p}=\coprod_{a=0}^{p^{n}-1} (a+p^{n}\mathbb{Z}_{p}).$$
 
 A **character** of a compact abelian group $G$ is a continuous homomorphism $\phi:G\to \mathbb{T}$.
 
-The set of characters $X(G)$ form a topological group in their own right. This is called the **dual group**
+The set of characters $X(G)$ form an abelian topological group in their own right. This is called the **dual group**
 to $G$.
 
 When $G=\mathbb{T}$, then the continuous characters are the functions
@@ -85,17 +85,27 @@ $$
 
 This function is called the Fourier transform of $\lambda$.
 
-## Examples
+## Examples 1: $G=\mathbb{T}$
 
 If $G=\mathbb{T}$, then:
 
-- $X(G)=\mathbb{Z}$ 
+- $X(G)=\{z^{n}=e^{in\theta}:n\in\mathbb{Z}\}=\mathbb{Z}$ 
 - the function $F_{\lambda}(n)$ gives the Fourier coefficients
-of $g_{\lambda}$.
+of $g_{\lambda}$ because
+$$F_{\lambda}(n)=\langle z^{n},g_{\lambda}\rangle = \int_{\theta=0}^{2\pi} e^{in\theta}\sum_{m\in\mathbb{Z}} \overline{a(m)}e^{-im\theta}d\theta = \overline{a(n)}$$
 
-If $G$ is finite:
+## Examples 2: $G$ finite
 
--  the distributions on $G$ are the group algebra $\mathbb{C}[G]$.
+The functions on $G$ are a finite dimensional space whose basis are the characteristic functions $\chi_{g}$ satisfying
+$$
+\chi_{g}(h)=\begin{cases} 1 & g=h \\ 0 & g\not=h \end{cases}
+$$
+
+-  the distributions are spanned by the "dirac distributions" which are dual to the characteristic functions
+$$
+\delta_g(f) = f(g).
+$$
+- All together the distributions on $G$ are the group algebra $\mathbb{C}[G]$.
 -  If $\lambda=\sum_{g}a(g)g$ and $\phi\in X(G)$ then 
 $$
 F_{\lambda}(\phi)=\sum_{g} a(g)\phi(g).
@@ -123,10 +133,12 @@ In $p$-adic Fourier theory the ingredients are:
 - Fourier transform converts distributions to functions on $X(G)$ by $\lambda \mapsto F_{\lambda}$ where
 $F_{\lambda}(\phi)=\lambda(\phi)$.
 
-Different because:
+## Key differences
 
 - continuous functions aren't Haar integrable (measures of small sets get $p$-adically large)
-- there are many more continuous functions from $\mathbb{Z}_p$ to $K$ than from $\mathbb{Z}_p$ to $\mathbb{C}$. 
+
+- The group $\mathbb{Z}_p$ is totally discontinuous (every open set is closed) so there are many more continuous functions from $\mathbb{Z}_p$ to $K$ than from $\mathbb{Z}_p$ to $\mathbb{C}$. 
+For example, locally constant functions are continuous.
 
 ## $\mathbb{Z}_p^{*}$ and $\mathbb{Z}$ are almost the same (p>2)
 
@@ -138,7 +150,7 @@ where $\mu_{p-1}$ is the finite group of $(p-1)^{st}$ roots of 1.
 
 **Proof:** 
 
-- Hensel's lemma applied to $x^{p-1}-1=0$ gives $\mu_{p-1}\subset\mathbb{Z}_{p}^{*}$.
+- Hensel's lemma applied to $x^{p-1}-1=0$ gives $\mu_{p-1}\subset\mathbb{Z}_{p}^{*}$ since this polynomial factors into linear factors mod $p$.
 - There's one element of $\mu_{p-1}$ in each congruence class.  So every element $a\in\mathbb{Z}_{p}^{*}$
 can be written uniquely as 
 $$
@@ -158,9 +170,16 @@ The power series
 $$
 \exp(px)=1+px+\frac{(px)^2}{2!}+\frac{(px)^3}{3!}+\ldots
 $$
-converges for $x\in\mathbb{Z}_p$ and satisfies $\exp(p(x+y))=\exp(px)\exp(py)$.
+converges for $x\in\mathbb{Z}_p$ and satisfies $\exp(p(x+y))=\exp(px)\exp(py)$. The power of $p$
+in $n!$ satisfies
+$$
+\mathrm{ord}_p(n!)<\frac{n}{p-1}.
+$$
 
-These maps give mutually inverse isomorphisms between $1+\mathbb{Z}_p$ and $\mathbb{Z}_p$.
+## exp and log
+
+The maps $\frac{1}{p}\log(1+x)$ and $\exp(px)$ 
+give mutually inverse (group) isomorphisms between $1+\mathbb{Z}_p$ and $\mathbb{Z}_p$.
 
 So $1+p\mathbb{Z}_p$ (under multiplication) is isomorphic to $\mathbb{Z}_p$ (under addition).
 
@@ -215,9 +234,9 @@ and these are dense in $\mathbb{Z}_p$.
 $$
 f(x)=\sum_{n=0}^{\infty} a(n)\binom{x}{n}
 $$
-where $a(n)\in K$ for all $n$ and $\lim_{n\to\infty} |a(n)|=0$.  Furthermore,
+where $a(n)\in K$ for all $n$ and $\lim_{n\to\infty} |a(n)|_p=0$.  Furthermore,
 $$
-\|f\|=\sup_{n=0}^{\infty} |a(n)|.
+\|f\|=\sup_{n=0}^{\infty} |a(n)|_p.
 $$
 
 Since the $a(n)$ go to zero, such an $f$ converges pointwise.
@@ -240,7 +259,7 @@ $$
 If $f:\mathbb{Z}_p\to K$ one can still construct this series and if it makes sense it will agree with
 $f$ on the integers, and then by continuity on all of $\mathbb{Z}_p$.  
 
-To prove convergence you need to show that the coefficients $\Delta^{i}(f)_{x=0}$ go to zero.  A detailed proof is given by Conrad
+To prove convergence you need to show that the coefficients $\Delta^{i}(f)_{x=0}$ go to zero $p$-adically.  A detailed proof is given by Conrad
 (google "conrad mahlerexpansions")
        
 ## Characters
@@ -279,29 +298,59 @@ $$
 
 ## Distributions
 
-**Proposition:** The space $D(G,K)$ of continuous linear maps $C(G,K)\to K$ is isomorphic (as a Banach space)
-to the space of bounded power series with coefficients in $K$ via 
+A linear map $\lambda:C(G,K)\to K$ is continuous if and only if it is bounded:
 $$
-\lambda \mapsto \sum_{n=0}^{\infty} \lambda(\binom{x}{n})T^{n}.
+\sup_{f} \|\lambda(f)\|_p <\infty.
+$$
+It is enough to check this on the set of binomial polynomials $\binom{x}{n}$.
+
+**Proposition:** The space $D(G,K)$ of continuous linear maps $C(G,K)\to K$ is isomorphic (as a Banach space)
+to the space of bounded sequences $(b(n))_{n=0}^{\infty}$ with entries in $K$, where
+$$
+b(n) = \lambda(\binom{x}{n}).
 $$
 
-If $g(T)=\sum_{n=0}^{\infty} c(n)T^{n}$, then the duality pairing $D(G,K)\times C(G,K)\to K$ is given by
+For reasons we will explain later we package these sequences up into formal power series with $p$-adically bounded coefficients.
+$$
+\lambda \mapsto F_{\lambda}=\sum_{n=0}^{\infty} \lambda(\binom{x}{n})T^{n}.
+$$
+
+## Duality
+
+If
+ $$g(T)=\sum_{n=0}^{\infty} c(n)T^{n}\in D(G,K)$$
+  and 
+  $$f\in C(G,K)=\sum a(n)\binom{x}{n},$$
+  then the duality pairing $D(G,K)\times C(G,K)\to K$ is given by
 $$
 \langle \sum c(n)T^n,\sum a(n)\binom{x}{n}\rangle =\sum_{n=0}^{\infty} c(n)a(n)
 $$
 
+which converges since the $c(n)$ are bounded and the $a(n)$ go to zero.
+
 ## The Fourier transform
+
+
+**Theorem:** The Fourier transform of the distribution $\lambda$ is a power series $F_{\lambda}(T)$ whose value at $z$
+is the distribution evaluted at the character $\phi_z$ where
+$$
+\phi_{z}(x)=(1+z)^{x}.
+$$
+That is,
+$$
+F_{\lambda}(z) = \lambda(\phi_{z}).
+$$
 
 Remember that the Fourier transform converts a distribution $\lambda$ into a function on the character space by
 the rule $F_{\lambda}(\phi) = \lambda(\phi)$.
 
-In our situation, if $\lambda=\sum c(n)T^{n}$ and $\phi=\phi_z$ then
+If $F_{\lambda}(T)=\sum c(n)T^{n}$ and $\phi_z$ is the character where $\phi_z(x)=(1+z)^x$ then
 $$
-F_{\lambda}(\phi) = \langle \sum c(n)T^n, \sum \binom{x}{n}z^n\rangle = \sum c(n)z^n.
+\lambda(\phi_z) = \langle \sum c(n)T^n, \sum \binom{x}{n}z^n\rangle = \sum c(n)z^n = F_{\lambda}(z).
 $$
+This converges because the $c(n)$ are bounded and $|z|<1$ so $z^n\to 0$.
 
-In other words, the Fourier transform of the distribution $\lambda$ is a power series whose value at $z$
-is the distribution evaluted at $\phi_z$.  
+
 
 ## The Iwasawa algebra
 
@@ -354,45 +403,11 @@ $$
 \partial^n F(T)|_{T=0}=\langle \partial^n F(T), 1\rangle =\langle F(T),x^n\rangle
 $$ 
 
-## The Kubota Leopoldt zeta function
 
-The (analytic continuation of) the Riemann zeta function relates the values of $\zeta(s)$ at negative integers
-to Bernoulli numbers:
-$$
-\zeta(-n)=-\frac{B_{n+1}}{n+1}
-$$
-where the Bernoulli numbers come from the generating function
-$$
-\frac{t}{e^{t}-1}=\sum_{n\ge 0} B_{n}\frac{t^{n}}{n!}.
-$$
+# Conclusions
 
-The arithmetic significance of the Bernoulli numbers goes back to Kummer who showed that Fermat's Last Theorem
-held for *regular* primes, meaning primes $p$ that do not divide the numerator of $B_k$ for $k$ between $2$ and $p-3$.
-
-This is the dawn of what we now call Iwasawa theory which relates the behavior of class groups in towers of fields to 
-the divisibility of special values of $L$-functions.
-
-## The Kubota-Leopoldt zeta function
-
-The K-L zeta function is an analytic function of a $p$-adic variable that "interpolates" the values $\zeta(n)$. 
-Its construction is most elegantly done through Fourier theory.
-
-Let 
-$$
-f_a(T)=\frac{1}{e^{t}-1}-\frac{a}{e^{at}-1}.
-$$
-One can show that
-$$
-f_a^(k)(0) = (-1)^k(1-a^{1+k})\zeta(-k)
-$$
-
-A chain rule exercise shows that if we set 
-$$
-F_a(T)=\frac{1}{T}-\frac{a}{(1+T)^a-1}
-$$
-then $$f_{a}^{(k)}(0)=\partial^{k}F_{a}(T)|_{T=0}$$.
-
-## The K-L zeta function
+The first important application of Fourier theory is the construction of the Kubota-Leopoldt $p$-adic zeta function. 
+The first step uses our result on "integrals" of $x^{n}$.
 
 **Lemma:** The power series
 $$
@@ -400,13 +415,28 @@ F_{a}(T)=\frac{1}{T}-\frac{a}{(1+T)^{a}-1}
 $$
 has coefficients in $\mathbb{Z}_p$ provided $a$ is an integer coprime to $p$. 
 
-Therefore $F_a(T)$ can be viewed as a distribution on $\mathbb{Z}_p$ that satisfies
+Therefore $F_a(T)$ can be viewed as a distribution on $\mathbb{Z}_p$.  It follows from the theory of the zeta function that 
 $$
-\langle F_a(T),x^k\rangle = (-1)^k(1-a^{1+k})\zeta(-k).
+\langle F_a(T),x^k\rangle = \partial^{k}F_{a}(T)|_{T=0}=(-1)^k(1-a^{1+k})\zeta(-k).
 $$
 
-We'd like this transform to be a $p$-adic function of $k$, but we're not quite there yet.
+We'd like this transform to be a $p$-adic function of $k$ which involves comparing Fourier theory of $\mathbb{Z}_p^{*}$
+and $\mathbb{Z}_p$.  See the references to learn how this works. 
 
+
+# References and further reading
+
+
+1. Conrad, Keith. Mahler Expansions. \href{https://kconrad.math.uconn.edu/blurbs/gradnumthy/mahlerexpansions.pdf}{Mahler Expansions}
+2. Jacinto, J. and Williams, \href{https://warwick.ac.uk/fac/sci/maths/people/staff/cwilliams/lecturenotes/lecturenotes-change.pdf}{An Introduction to $p$-adic $L$-functions}
+3. Washington, Lawrence. Introduction to Cyclotomic Fields. Graduate Texts in Mathematics Volume 83. See especially Chapter 13.
+4. De Shalit, E. \href{http://www.ma.huji.ac.il/~deshalit/new_site/files/Mahler.pdf}{Mahler bases and elementary $p$-adic analysis}
+5. Bhargava, M. and Kedlaya, K. \href{https://eudml.org/doc/207350}{Continuous functions on compact subsets of local fields}
+6. Schneider, P. and Teitelbaum, J. \href{$p$-adic Fourier Theory}{https://www.math.uni-bielefeld.de/documenta/vol-06/18.pdf}
+
+
+
+# Additional Material
 ## The Mellin transform
 
 Remember that we showed that $\mathbb{Z}_p^{*}$ is isomorphic to $\mu_{p-1}\times\mathbb{Z}_p$
