@@ -63,6 +63,7 @@ $$
 (The Riesz representation theorem makes this precise).
 
 Compact groups have a continuous "invariant distribution of mass one" (for $\mathbb{T}$, this is $\frac{1}{2\pi}d\theta$).
+
 ## Characters and the dual group
 
 A **character** of $G=\mathbb{T}$ is a continuous homomorphism $\phi:G\to \mathbb{T}$.
