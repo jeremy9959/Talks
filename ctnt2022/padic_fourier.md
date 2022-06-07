@@ -62,6 +62,8 @@ $$
 
 (The Riesz representation theorem makes this precise).
 
+One example: the Dirac distribution $\delta_x$ at $x\in G$: $\delta_x(f)=f(x)$.
+
 Compact groups have a continuous "invariant distribution of mass one" (for $\mathbb{T}$, this is $\frac{1}{2\pi}d\theta$).
 
 ## Characters and the dual group
