@@ -138,8 +138,7 @@ $$
 \zeta^{x}=\zeta^{a_0+a_1p+a_2p^2+\cdots}
 $$
 makes sense, is locally constant, and satisfies $\zeta^{x+y}=\zeta^{x}\zeta^{y}.$
-- polynomial functions 
-- locally polynomial functions
+- polynomial functions
 
 ## Continuous functions on $\mathbb{Z}_p$
 
@@ -214,6 +213,8 @@ determined by continuity and by $f(1)$:
 
 In particular, $a^{p^{n}}\to 1$ as $n\to\infty$, which forces $|a-1|<1$.
 
+## Characters
+
 If $a=1+z$ where $|z|<1$ then Mahler's theorem tells us that
 $$
 (1+z)^x=\sum_{i=0}^{\infty} \binom{x}{i}z^{i}
@@ -241,9 +242,10 @@ $$
 
 A linear map $\lambda:C(G,K)\to K$ is continuous if and only if it is bounded:
 $$
-\sup_{f} \|\lambda(f)\|_p <C\|f\|
+\sup_{f\not=0} \frac{\|\lambda(f)\|_p}{\|f\|} <C
 $$
 for some constant $C$.
+
 It is enough to check this on the set of binomial polynomials $\binom{x}{n}$, which have sup-norm $1$.
 
 ## Distributions continued 
@@ -284,6 +286,8 @@ That is,
 $$
 F_{\lambda}(z) = \lambda(\phi_{z}).
 $$
+
+## The Fourier transform as a function on X($\mathbb{Z}$)
 
 Remember that the Fourier transform converts a distribution $\lambda$ into a function on the character space by
 the rule $F_{\lambda}(\phi) = \lambda(\phi)$.
