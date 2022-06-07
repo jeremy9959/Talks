@@ -10,7 +10,7 @@ author:
 
 1. Brief look at classical fourier analysis for motivation
 2.  Continuous functions on $\mathbb{Z}_p$ and Mahler's Theorem
-3.  Distributions, characters, and the Iwasawa algebra
+3.  Distributions (integrals), characters, and the Iwasawa algebra
 4.  A look ahead
 
 ## Classical Fourier Analysis
@@ -25,7 +25,44 @@ Example:
 
 - $G=\{z\in\mathbb{C}: |z|=1\}$, so $G$ is the circle group $\mathbb{T}$.
 
+## Function Spaces
 
+In analysis, we think about spaces of functions on our group $G$.  These are *topological vector spaces.*
+
+Two important examples:
+
+1.  $C(G,\mathbb{C})$ - the space of *continuous functions* on $G$ with $\|f\|=\sup_{x\in G} \|f(x)\|$.
+2.  $L^{2}(G)$ - the Hilbert space of square-integrable functions on $G$ with inner product
+$$
+\langle f,g\rangle = \frac{1}{2\pi}\int_{\theta=0}^{2\pi} f\overline{g}d\theta.
+$$
+
+## Distributions 
+
+A *continuous distribution* on $G$ is a continuous linear map
+$$
+\lambda: C(G,\mathbb{C})\to \mathbb{C}.
+$$
+
+An $L^{2}$ distribution on $G$ is a continuos linear map $\lambda:L^{2}(G)\to\mathbb{C}$.  
+Any such map is of the form 
+$$
+\lambda(f)=\langle f,g_{\lambda}\rangle
+$$
+for some $g_{\lambda}\in L^{2}(G)$. 
+
+## Distributions and integrals/measures
+
+A distribution $\lambda$ converts a function $f$ into a number $\lambda(f)$. 
+
+Think of it as an integral:
+$$
+\lambda(f)=\int_{G} f d\lambda.
+$$
+
+(The Riesz representation theorem makes this precise).
+
+Compact groups have a continuous "invariant distribution of mass one" (for $\mathbb{T}$, this is $\frac{1}{2\pi}d\theta$).
 ## Characters and the dual group
 
 A **character** of $G=\mathbb{T}$ is a continuous homomorphism $\phi:G\to \mathbb{T}$.
@@ -39,25 +76,11 @@ $$
 $$
 where $n\in\mathbb{Z}$ and $X(\mathbb{T})=\mathbb{Z}$. 
 
-
-## Distributions 
-
-$L^2(G)$ is the Hilbert space of complex valued functions on $G$ with inner product
-$$
-<f,g>=\int_{G} f\overline{g}d\mu
-$$
-where $d\mu$ is the normalized Haar measure on $G$.
-
-A distribution on $G$ is a continuous linear map $\lambda: L^2(G)\to\mathbb{C}$.  
-
-By Hilbert space theory,
-any such $\lambda$ is of the form $\lambda(f)=<f,g_{\lambda}>$ for some $g_{\lambda}\in L^{2}(G)$.
-
 ## Fourier transform
 
 A distribution $\lambda$ gives a function $F_{\lambda}$ on the space of characters $X(G)$ by 
 $$
-F_{\lambda}(\phi) = \lambda(\phi)=<\phi,g_{\lambda}>.
+F_{\lambda}(\phi) = \lambda(\phi)=<\phi,g_{\lambda}> = \int_{G} \phi d\lambda
 $$
 
 This function is called the Fourier transform of $\lambda$.
@@ -67,9 +90,10 @@ This function is called the Fourier transform of $\lambda$.
 If $G=\mathbb{T}$, then:
 
 - $X(G)=\{z^{n}=e^{in\theta}:n\in\mathbb{Z}\}=\mathbb{Z}$ 
-- the function $F_{\lambda}(n)$ gives the Fourier coefficients
-of $g_{\lambda}$ because
-$$F_{\lambda}(n)=\langle z^{n},g_{\lambda}\rangle = \int_{\theta=0}^{2\pi} e^{in\theta}\sum_{m\in\mathbb{Z}} \overline{a(m)}e^{-im\theta}d\theta = \overline{a(n)}$$
+
+- If $\lambda$ is  the distribution $\lambda(f)=\langle f, g_\lambda\rangle$ for a function $g_{\lambda}$, then 
+$$F_{\lambda}(n)=\langle z^{n},g_{\lambda}\rangle$$
+which is the (conjugage of) the $n^{th}$ fourier coefficient of $g_\lambda$. 
 
 ## Key ingredients
 
@@ -85,20 +109,20 @@ $$F_{\lambda}(n)=\langle z^{n},g_{\lambda}\rangle = \int_{\theta=0}^{2\pi} e^{in
 
 In $p$-adic Fourier theory the ingredients are:
 
-- $\mathbb{G}=\mathbb{Z}_{p}$ (or $G=\mathbb{Z}_p^{*}$.)
+- $\mathbb{G}=\mathbb{Z}_{p}$ 
 - The space of continuous functions $C(G,K)$ where $K$ is a complete extension field of $\mathbb{Q}_{p}$.
-- The space $X(G)$ of continuous characters $\phi: G\to K^{*}$.
 - Distributions are continuous linear maps $C(G,K)\to K$.
+- The space $X(G)$ of continuous characters $\phi: G\to K^{*}$.
 - Fourier transform converts distributions to functions on $X(G)$ by $\lambda \mapsto F_{\lambda}$ where
 $F_{\lambda}(\phi)=\lambda(\phi)$.
 
-## Key differences
+## Differences
 
-- continuous functions aren't Haar integrable (measures of small sets get $p$-adically large)
+- The group $\mathbb{Z}_p$ is totally discontinuous (every open set is closed).
 
-- The group $\mathbb{Z}_p$ is totally discontinuous (every open set is closed) so there are many more continuous functions from $\mathbb{Z}_p$ to $K$ than from $\mathbb{Z}_p$ to $\mathbb{C}$. 
-For example, locally constant functions are continuous.
+- No $L^{2}$ theory 
 
+- No invariant continuous distribution (no Haar measure).
 
 ## Continuous functions on $\mathbb{Z}_p$
 
