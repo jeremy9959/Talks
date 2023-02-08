@@ -352,6 +352,7 @@ and $\mathbb{Z}_p$.  See the references to learn how this works.
 4. De Shalit, E. \href{http://www.ma.huji.ac.il/~deshalit/new_site/files/Mahler.pdf}{Mahler bases and elementary $p$-adic analysis}
 5. Bhargava, M. and Kedlaya, K. \href{https://eudml.org/doc/207350}{Continuous functions on compact subsets of local fields}
 6. Schneider, P. and Teitelbaum, J. \href{$p$-adic Fourier Theory}{https://www.math.uni-bielefeld.de/documenta/vol-06/18.pdf}
+7. Schneider, P. Non-archimedean functional analysis, Springer Monographs in Math.
 
 
 
