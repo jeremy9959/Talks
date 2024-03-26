@@ -1,8 +1,8 @@
 ---
 title: |
        | The Three Theorems of Data Science
-       | UConn AI Club
-       | February 6, 2023
+       | UConn Math Club
+       | April 3, 2024
 author:  Jeremy Teitelbaum
 header-includes:
        - \usepackage{minted}
